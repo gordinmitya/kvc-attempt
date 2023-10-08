@@ -1,0 +1,4 @@
+kick_start_training.py will launch the training based on the variable called "scenario" which can be 'desktop' or 'mobile'. This script will create the models and the log files. 
+kick_start_evaluate.py will run the evaluation (based on the variable "scenario") and generate the two txt files of predictions. It is necessary to manually zip the two predictions files (check kick_start_scores.zip).
+The predictions files must keep the same name ("desktop_predictions.txt", "mobile_predictions.txt") and format, but the name of the zip file can be changed.
+kick_start_scores.zip is ready to be submitted. 
