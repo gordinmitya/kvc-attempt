@@ -20,11 +20,20 @@ class Kick_Start_Model(nn.Module):
         return embedding
 
 
-scenario = 'mobile'
+def load_test_data_from_h5(file_path):
+    import h5py
+    data = {}
+    with h5py.File(file_path, 'r') as f:
+        for key in f.keys():
+            data[key] = np.array(f[key])
+    return data
 
+
+scenario = 'mobile'
 with open("{}/{}_comparisons.txt".format(scenario, scenario), "r") as file:
     comps = eval(file.readline())
-data = np.load('{}/{}_test_sessions.npy'.format(scenario, scenario), allow_pickle=True).item()
+# data = np.load('{}/{}_test_sessions.npy'.format(scenario, scenario), allow_pickle=True).item()
+data = load_test_data_from_h5('{}/{}_test_sessions.h5'.format(scenario, scenario))
 
 model = Kick_Start_Model(input_size=2, hidden_size=32, output_size=32).double()
 model.load_state_dict(torch.load('kick_start_model_{}.pt'.format(scenario))) # , strict=False)

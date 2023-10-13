@@ -69,9 +69,21 @@ class PrepareData:
         return self.len
 
 
+def load_data_from_h5(file_path):
+    import h5py
+    data = {}
+    with h5py.File(file_path, 'r') as f:
+        for group_key in f.keys():
+            group_value = {}
+            for inner_key in f[group_key].keys():
+                group_value[inner_key] = np.array(f[group_key][inner_key])
+            data[group_key] = group_value
+    return data
 
-file_loc = '{}/{}_dev_set.npy'.format(scenario, scenario)
-data = np.load(file_loc, allow_pickle=True).item()
+
+# file_loc = '{}/{}_dev_set.npy'.format(scenario, scenario)
+# data = np.load(file_loc, allow_pickle=True).item()
+data = load_data_from_h5('{}/{}_dev_set.h5'.format(scenario, scenario))
 
 
 dev_set_users = list(data.keys())
