@@ -3,3 +3,4 @@ torch
 matplotlib
 scikit-learn
 h5py
+tqdm
