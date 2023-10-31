@@ -28,3 +28,12 @@ def load_train_data(scenario):
 
 def load_test_data(scenario):
     return load_test_data_h5(f'{scenario}/{scenario}_test_sessions.h5')
+
+
+if __name__ == '__main__':
+    for scenario in ['desktop', 'mobile']:
+        data = load_train_data(scenario)
+        np.save(f'{scenario}/{scenario}_dev_set.npy', data)
+
+        data = load_test_data(scenario)
+        np.save(f'{scenario}/{scenario}_test_sessions.npy', data)
